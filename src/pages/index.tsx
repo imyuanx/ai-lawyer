@@ -16,8 +16,8 @@ import {
 import { PrependParameters } from "rsuite/esm/@types/utils";
 import { TypeAttributes } from "rsuite/esm/@types/common";
 
-const Textarea = forwardRef((props, ref) => (
-  <Input {...props} as="textarea" ref={ref} className={styles.textarea} />
+const Textarea = forwardRef((props) => (
+  <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -113,7 +113,6 @@ export default function Home() {
             <Form.Group controlId="textarea">
               <Form.ControlLabel>事实经过：</Form.ControlLabel>
               <Form.Control
-                rows={5}
                 name="textarea"
                 accepter={Textarea}
                 value={fact}
@@ -123,7 +122,6 @@ export default function Home() {
             <Form.Group controlId="textarea">
               <Form.ControlLabel>诉求：</Form.ControlLabel>
               <Form.Control
-                rows={5}
                 name="textarea"
                 accepter={Textarea}
                 value={appeal}
@@ -147,7 +145,8 @@ export default function Home() {
           </Form>
         </div>
         <div className={styles.output}>
-          <Textarea
+          <Input
+            as="textarea"
             placeholder="等待生成起诉书..."
             value={indictment}
             onChange={indictmentChange}

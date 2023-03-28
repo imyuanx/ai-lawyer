@@ -68,4 +68,8 @@
   .main .textarea {
     width: 100%;
   }
+
+  .footer {
+    position: relative;
+  }
 }
