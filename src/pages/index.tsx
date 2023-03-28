@@ -37,7 +37,7 @@ export default function Home() {
     );
   };
 
-  const generateIndictment = () => {
+  const generateIndictment = async () => {
     setLoading(true);
     if (!fact || !appeal) {
       toaster.push(MyMessage("请输入‘事实经过’和‘诉求’！", "warning"), {
@@ -47,35 +47,51 @@ export default function Home() {
       setLoading(false);
       return;
     }
+    console.log(fact, appeal);
+
+    setIndictment("");
     const body: GenerateIndictmentBody = {
       fact: fact,
       appeal: appeal,
     };
-    fetch(`${window.location.href}api/generateIndictment`, {
+    const res = await fetch(`${window.location.href}api/generateIndictment`, {
       method: "post",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
-    })
-      .then(async (res) => {
-        try {
-          const data = await res.json();
-          setIndictment(data.text);
-          setLoading(false);
-        } catch {
-          toaster.push(MyMessage("生成失败，请重试！", "error"), {
-            placement: "topCenter",
-            duration: 2000,
-          });
-          setLoading(false);
+    });
+    let error = "";
+    if (res.ok) {
+      try {
+        const data = res.body;
+        if (!data) {
+          return;
         }
-      })
-      .catch((err) => {
-        toaster.push(MyMessage("生成失败，请重试！", "error"), {
-          placement: "topCenter",
-          duration: 2000,
-        });
-        setLoading(false);
-      });
+        const reader = data.getReader();
+        const decoder = new TextDecoder();
+        let chunkValues = "";
+        while (true) {
+          const { value, done } = await reader.read();
+          const chunkValue = decoder.decode(value);
+          chunkValues += chunkValue;
+          setIndictment(chunkValues);
+          if (done) {
+            break;
+          }
+        }
+      } catch (err) {
+        error = "生成失败，请重试！";
+      }
+    } else {
+      error = "生成失败，请重试！";
+    }
+    toaster.push(
+      MyMessage(error || "生成完成，祝好", error ? "error" : "success"),
+      {
+        placement: "topCenter",
+        duration: 2000,
+      }
+    );
+    setLoading(false);
   };
 
   const cleanForm = () => {
