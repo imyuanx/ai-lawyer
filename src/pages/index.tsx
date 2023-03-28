@@ -57,11 +57,18 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        res.json().then((data) => {
-          console.log("data", data);
-          setIndictment(data.text);
-          setLoading(false);
-        });
+        try {
+          res.json().then((data) => {
+            console.log("data", data);
+            setIndictment(data.text);
+            setLoading(false);
+          });
+        } catch {
+          toaster.push(MyMessage("生成失败，请重试！", "error"), {
+            placement: "topCenter",
+            duration: 2000,
+          });
+        }
       })
       .catch((err) => {
         toaster.push(MyMessage("生成失败，请重试！", "error"), {
