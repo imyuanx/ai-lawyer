@@ -33,6 +33,11 @@
   align-items: flex-start;
 }
 
+.tips {
+  font-size: 12px;
+  color: #999999;
+}
+
 .output {
   flex: 1;
   height: 100%;

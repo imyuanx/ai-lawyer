@@ -22,6 +22,9 @@ const Textarea = forwardRef((props) => (
 
 // const inter = Inter({ subsets: ["latin"] });
 
+const FACT_PLACEHOLDER = `例：我与 xxx 在 2022 年 10 月签订一份为期一年的房屋租赁合同，其中我为租户、xxx 为中介，租金为 6300 元每月压一付一，2023 年 3 月 xxx 单方面解除合同，导致我无法继续居住并且拒绝退还押金，多次尝试联系 xxx 均未得到回应`;
+const APPEAL_PLACEHOLDER = `例：要求 xxx 立即退还押金、利息，赔偿一个月租金等额违约金，赔偿误工费、律师费、诉讼费等费用`;
+
 export default function Home() {
   const [fact, setFact] = useState("");
   const [appeal, setAppeal] = useState("");
@@ -138,6 +141,7 @@ export default function Home() {
                 name="textarea"
                 accepter={Textarea}
                 value={fact}
+                placeholder={FACT_PLACEHOLDER}
                 onChange={factChange}
               />
             </Form.Group>
@@ -147,6 +151,7 @@ export default function Home() {
                 name="textarea"
                 accepter={Textarea}
                 value={appeal}
+                placeholder={APPEAL_PLACEHOLDER}
                 onChange={appealChange}
               />
             </Form.Group>
@@ -163,6 +168,13 @@ export default function Home() {
                   清除数据
                 </Button>
               </ButtonToolbar>
+            </Form.Group>
+            <Form.Group>
+              <div className={styles.tips}>
+                {
+                  "小提示：尽量不要使用个人真实信息，可以使用 “x 先生 / 女士” 等方式代替"
+                }
+              </div>
             </Form.Group>
           </Form>
         </div>
