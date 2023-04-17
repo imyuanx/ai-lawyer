@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState, forwardRef } from "react";
+import { ChangeEventHandler, useState, forwardRef, useEffect } from "react";
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { GenerateIndictmentBody } from "./api/generateIndictment";
@@ -13,6 +13,7 @@ import {
 } from "rsuite";
 import { PrependParameters } from "rsuite/esm/@types/utils";
 import { TypeAttributes } from "rsuite/esm/@types/common";
+import * as ackeeTracker from "ackee-tracker";
 
 const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
@@ -27,6 +28,21 @@ export default function Home() {
   const [indictment, setIndictment] = useState("");
   const [loading, setLoading] = useState(false);
   const toaster = useToaster();
+  const [ackeeServer, setAckeeServer] = useState("");
+  const [ACKEE, setACKEE] = useState<ackeeTracker.AckeeInstance>();
+
+  useEffect(() => {
+    if (location.hostname === "ai-lawyer.yuanx.me") {
+      const ackeeServer = "https://ackee.yuanx.me";
+      setAckeeServer(ackeeServer);
+      setACKEE(
+        ackeeTracker.create(ackeeServer, {
+          detailed: true,
+          ignoreLocalhost: false,
+        })
+      );
+    }
+  }, []);
 
   const MyMessage = (content: string, type: TypeAttributes.Status) => {
     return (
@@ -37,6 +53,10 @@ export default function Home() {
   };
 
   const generateIndictment = async () => {
+    ACKEE?.action("eb09d303-db45-40db-aefd-1183d951b2c0", {
+      key: "Click",
+      value: 1,
+    });
     setLoading(true);
     if (!fact || !appeal) {
       toaster.push(MyMessage("请输入‘事实经过’和‘诉求’！", "warning"), {
@@ -126,6 +146,15 @@ export default function Home() {
         <meta name="description" content="AI 维权律师" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {ackeeServer && (
+          <script
+            async
+            src={`${ackeeServer}/tracker.js`}
+            data-ackee-server={ackeeServer}
+            data-ackee-domain-id="7cff383e-2fdf-4191-94c1-58f4a0c2d7d7"
+            data-ackee-opts='{ "detailed": true, "ignoreLocalhost": false }'
+          ></script>
+        )}
       </Head>
       <main className={styles.main}>
         <div className={styles.config}>
