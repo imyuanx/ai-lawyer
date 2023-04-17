@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/node': ^18.15.10
+  '@types/react': ^18.0.35
   '@types/react-dom': ^18.0.11
   eventsource-parser: ^1.0.0
   next: ^13.2.4
@@ -12,6 +13,7 @@ specifiers:
 
 dependencies:
   '@types/node': 18.15.10
+  '@types/react': 18.0.35
   '@types/react-dom': 18.0.11
   eventsource-parser: 1.0.0
   next: 13.2.4_react-dom@18.2.0+react@18.2.0
@@ -195,6 +197,14 @@ packages:
 
   /@types/react/18.0.29:
     resolution: {integrity: sha512-wXHktgUABxplw1+UnljseDq4+uztQyp2tlWZRIxHlpchsCFqiYkvaDS8JR7eKOQm8wziTH/el5qL7D6gYNkYcw==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.3
+      csstype: 3.1.1
+    dev: false
+
+  /@types/react/18.0.35:
+    resolution: {integrity: sha512-6Laome31HpetaIUGFWl1VQ3mdSImwxtFZ39rh059a1MNnKGqBpC88J6NJ8n/Is3Qx7CefDGLgf/KhN/sYCf7ag==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
