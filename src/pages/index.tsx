@@ -1,7 +1,5 @@
-import React, { ChangeEventHandler, useState, forwardRef } from "react";
+import { ChangeEventHandler, useState, forwardRef } from "react";
 import Head from "next/head";
-// import Image from "next/image";
-// import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { GenerateIndictmentBody } from "./api/generateIndictment";
 import {
@@ -19,8 +17,6 @@ import { TypeAttributes } from "rsuite/esm/@types/common";
 const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
-
-// const inter = Inter({ subsets: ["latin"] });
 
 const FACT_PLACEHOLDER = `例：我与 xxx 在 2022 年 10 月签订一份为期一年的房屋租赁合同，其中我为租户、xxx 为中介，租金为 6300 元每月压一付一，2023 年 3 月 xxx 单方面解除合同，导致我无法继续居住并且拒绝退还押金，多次尝试联系 xxx 均未得到回应`;
 const APPEAL_PLACEHOLDER = `例：要求 xxx 立即退还押金、利息，赔偿一个月租金等额违约金，赔偿误工费、律师费、诉讼费等费用`;
