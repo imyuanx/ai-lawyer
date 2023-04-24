@@ -38,6 +38,22 @@
   color: #999999;
 }
 
+.example {
+  display: flex;
+}
+
+.example-label {
+  line-height: 24px;
+}
+
+.example-container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6;
+  row-gap: 6;
+}
+
 .output {
   flex: 1;
   height: 100%;
