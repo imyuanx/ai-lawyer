@@ -50,8 +50,8 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 6;
-  row-gap: 6;
+  gap: 6px;
+  row-gap: 6px;
 }
 
 .output {
