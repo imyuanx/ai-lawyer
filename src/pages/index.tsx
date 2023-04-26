@@ -126,7 +126,7 @@ export default function Home() {
       fact: fact,
       appeal: appeal,
     };
-    const res = await fetch(`${window.location.href}api/generateIndictment`, {
+    const res = await fetch("/api/generateIndictment", {
       method: "post",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
@@ -135,9 +135,7 @@ export default function Home() {
     if (res.ok) {
       try {
         const data = res.body;
-        if (!data) {
-          return;
-        }
+        if (!data) return;
         const reader = data.getReader();
         const decoder = new TextDecoder();
         let chunkValues = "";
@@ -146,9 +144,7 @@ export default function Home() {
           const chunkValue = decoder.decode(value);
           chunkValues += chunkValue;
           setIndictment(chunkValues);
-          if (done) {
-            break;
-          }
+          if (done) break;
         }
       } catch (err) {
         error = "生成失败，请重试！";
