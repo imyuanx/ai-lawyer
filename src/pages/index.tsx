@@ -120,7 +120,6 @@ export default function Home() {
       setLoading(false);
       return;
     }
-    console.log(fact, appeal);
 
     setIndictment("");
     const body: GenerateIndictmentBody = {
