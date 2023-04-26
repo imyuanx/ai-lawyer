@@ -46,6 +46,17 @@ const EXAMPLE = [
   },
 ];
 
+function Notices() {
+  return (
+    <Message type={"info"}>
+      {
+        "大家好！我是袁先。很高兴这个项目能够帮助到大家。目前，AI 维权律师每天为大家生成 200+ 封起诉书，但是这也意味着耗费数十万的 tokens。由于运营成本较高，不得不做出一些限制：每日提供最高 5 美元额度的服务，用完后会暂停服务，直到次日 10 点左右再次恢复（特殊情况除外）。同时，也开通了捐赠渠道，希望大家能支持这个项目，让更多人可以长期受益。谢谢！"
+      }
+      <a href="/reward.jpg">👉 点击捐赠 ❤️</a>
+    </Message>
+  );
+}
+
 export default function Home() {
   const [fact, setFact] = useState("");
   const [appeal, setAppeal] = useState("");
@@ -54,6 +65,25 @@ export default function Home() {
   const toaster = useToaster();
   const [ackeeServer, setAckeeServer] = useState("");
   const [ACKEE, setACKEE] = useState<ackeeTracker.AckeeInstance>();
+
+  function Example() {
+    return (
+      <div className={styles.example}>
+        <div className={styles["example-label"]}>例：</div>
+        <div className={styles["example-container"]}>
+          {EXAMPLE.map(({ type, fact, appeal }) => (
+            <Button
+              size="xs"
+              key={type}
+              onClick={() => setExample(fact, appeal)}
+            >
+              {type}
+            </Button>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (location.hostname === "ai-lawyer.yuanx.me") {
@@ -188,12 +218,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.config}>
           <h1 className={styles.title}>AI 维权律师</h1>
-          <Message type={"info"}>
-            {
-              "大家好！我是袁先。很高兴这个项目能够帮助到大家。目前，AI 维权律师每天为大家生成 200+ 封起诉书，但是这也意味着耗费数十万的 tokens。由于运营成本较高，不得不做出一些限制：每日提供最高 5 美元额度的服务，用完后会暂停服务，直到次日 10 点左右再次恢复（特殊情况除外）。同时，也开通了捐赠渠道，希望大家能支持这个项目，让更多人可以长期受益。谢谢！"
-            }
-            <a href="/reward.jpg">👉 点击捐赠 ❤️</a>
-          </Message>
+          <Notices />
           <Form fluid className={styles.form}>
             <Form.Group controlId="textarea">
               <Form.ControlLabel>事实经过：</Form.ControlLabel>
@@ -216,20 +241,7 @@ export default function Home() {
               />
             </Form.Group>
             <Form.Group>
-              <div className={styles.example}>
-                <div className={styles["example-label"]}>例：</div>
-                <div className={styles["example-container"]}>
-                  {EXAMPLE.map(({ type, fact, appeal }) => (
-                    <Button
-                      size="xs"
-                      key={type}
-                      onClick={() => setExample(fact, appeal)}
-                    >
-                      {type}
-                    </Button>
-                  ))}
-                </div>
-              </div>
+              <Example />
             </Form.Group>
             <Form.Group>
               <ButtonToolbar>
