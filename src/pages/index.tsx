@@ -14,37 +14,11 @@ import {
 import { PrependParameters } from "rsuite/esm/@types/utils";
 import { TypeAttributes } from "rsuite/esm/@types/common";
 import * as ackeeTracker from "ackee-tracker";
+import EXAMPLE from "../../example";
 
 const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
-
-const EXAMPLE = [
-  {
-    type: "租赁纠纷",
-    fact: "我与 xxx 在 2022 年 10 月签订一份为期一年的房屋租赁合同，其中我为租户、xxx 为中介，租金为 6300 元每月压一付一，2023 年 3 月 xxx 单方面解除合同，导致我无法继续居住并且拒绝退还押金，多次尝试联系 xxx 均未得到回应",
-    appeal:
-      "要求 xxx 立即退还押金、利息，赔偿一个月租金等额违约金，赔偿误工费、律师费、诉讼费等费用",
-  },
-  {
-    type: "劳动纠纷",
-    fact: "自 2022 年 10 月起我在 xxx 公司担任软件开发工程师并签订一份为期三年的劳动合同，在职期间 xxx 公司以未转正为由拒绝为我缴纳社保直至 6 个月试用期满",
-    appeal:
-      "要求 xxx 公司为我一次性补缴 6 个月社保、赔偿半个月薪资，并且立即解除劳动关系合同",
-  },
-  {
-    type: "离婚纠纷",
-    fact: "我与 xxx 在 2022 年 10 月结为夫妻，并于 2022 年 11 月 登记、办理结婚证，结婚以后 xxx 长期对我进行家庭暴力，并且多次将夫妻共同财产赠予第三者",
-    appeal:
-      "要求 xxx 赔偿我精神损失费、医药费、律师费、诉讼费等共计 74888 元，要求 xxx 退还 34000 元夫妻共同财产，要求判处立即离婚",
-  },
-  {
-    type: "人格权纠纷",
-    fact: "xxx 长期在社交平台（包括但不限于微博、微信朋友圈、QQ 空间）发表对我侮辱、谩骂的言论，对我造成极大的心理伤害和社会影响，严重侵犯了我的人格权、肖像权、名誉权等合法权益",
-    appeal:
-      "要求 xxx 立即停止损害我的合法权益、公开道歉并公示 1 个月，要求 xxx 赔偿我精神损失费、误工费、律师费、诉讼费等共计 68898 元",
-  },
-];
 
 function Notices() {
   return (
