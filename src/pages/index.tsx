@@ -10,6 +10,7 @@ import {
   Message,
   useToaster,
   Footer,
+  Modal,
 } from "rsuite";
 import { PrependParameters } from "rsuite/esm/@types/utils";
 import { TypeAttributes } from "rsuite/esm/@types/common";
@@ -20,13 +21,34 @@ const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
 
+const SPONSORS_LIST = ["yinali***", "**华"];
+
 function Notices() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openSponsorsList = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Message type={"info"}>
       {
         "大家好！我是袁先。很高兴这个项目能够帮助到大家。目前，AI 维权律师每天为大家生成 200+ 封起诉书，但是这也意味着耗费数十万的 tokens。由于运营成本较高，不得不做出一些限制：每日提供最高 5 美元额度的服务，用完后会暂停服务，直到次日 10 点左右再次恢复（特殊情况除外）。同时，也开通了捐赠渠道，希望大家能支持这个项目，让更多人可以长期受益。谢谢！"
       }
       <a href="/reward.jpg">👉 点击捐赠 ❤️</a>
+      <a href="javascript:void(0)" onClick={openSponsorsList}>
+        {" 捐赠列表 ❤️"}
+      </a>
+      <Modal open={isOpen} onClose={openSponsorsList}>
+        <Modal.Header>
+          <Modal.Title>捐赠者列表</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {SPONSORS_LIST.map((Rewarder) => (
+            <p>{`@${Rewarder}`}</p>
+          ))}
+        </Modal.Body>
+      </Modal>
     </Message>
   );
 }
