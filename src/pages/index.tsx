@@ -21,7 +21,7 @@ const Textarea = forwardRef((props) => (
   <Input rows={5} {...props} as="textarea" className={styles.textarea} />
 ));
 
-const SPONSORS_LIST = ["yinali***", "**华"];
+const SPONSORS_LIST = ["yinali***", "**华", "Z*d"];
 
 function Notices() {
   const [isOpen, setIsOpen] = useState(false);
